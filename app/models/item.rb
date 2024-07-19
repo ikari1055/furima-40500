@@ -7,9 +7,13 @@ class Item < ApplicationRecord
 
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :prefacture
   belongs_to :productcategory
-  belongs_to_active_hash :condition
+  belongs_to :prefecture
+  belongs_to :condition
+  belongs_to :shipping_cost
+  belongs_to :shipping_days
+
+
 
 
 
@@ -17,6 +21,8 @@ class Item < ApplicationRecord
   validates :price, presence: true
   validates :description, presence: true
   validates :condition_id, presence: true, numericality: { other_than: 1 }
+  validates :shipping_cost_id, presence: true
+  validates :shipping_days_id, presence: true
   validates :cost, presence: true
   validates :days, presence: true
   validates :prefecture_id, presence: true

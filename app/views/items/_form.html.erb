@@ -58,20 +58,20 @@
     <div class="form">
       <div class="weight-bold-text">
         配送料の負担
-        <span class="indispensable">必須</span>
-      </div>
-      <%= f.text_field :cost, class:"items-text", id:"item-cost", placeholder:"配送料の負担" %>
-      <div class="weight-bold-text">
-        発送元の地域
-        <span class="indispensable">必須</span>
-      </div>
-      <%= f.text_field :prefecture_id, class:"items-text", id:"item-prefecture", placeholder:"発送元の地域" %>
+    <span class="indispensable">必須</span>
+ </div>
+  <%= f.collection_select(:shipping_cost_id, ShippingCost.all, :id, :name, {}, { class: "select-box", id: "item-shipping-cost" }) %>
+       <div class="weight-bold-text">
+       <span class="indispensable">必須</span>
+  </div>
+  <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, { class: "select-box", id: "item-prefecture" }) %>
+</div>
       <div class="weight-bold-text">
         発送までの日数
-        <span class="indispensable">必須</span>
-      </div>
-      <%= f.text_field :days, class:"items-text", id:"item-days", placeholder:"発送までの日数" %>
-    </div>
+         <span class="indispensable">必須</span>
+  </div>
+  <%= f.collection_select(:shipping_days_id, ShippingDays.all, :id, :name, {}, { class: "select-box", id: "item-shipping-days" }) %>
+</div>
   </div>
 
   <%# 販売価格 %>
