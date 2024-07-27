@@ -12,4 +12,6 @@ class ProductCategory < ActiveHash::Base
     { id: 10, name: 'スポーツ・レジャー' },
     { id: 11, name: 'その他' }
   ]
+  include ActiveHash::Associations
+  has_many :items
 end

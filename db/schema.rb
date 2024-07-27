@@ -51,6 +51,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_16_065906) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "condition_id"
+    t.integer "shipping_cost_id"
+    t.integer "shipping_days_id"
+    t.boolean "sold_out", default: false
   end
 
   create_table "prefectures", charset: "utf8", force: :cascade do |t|

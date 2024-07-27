@@ -1,8 +1,13 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :show, :destroy]
+  before_action :authenticate_user!, only: [:new, :create] # ログインしているユーザーのみアクセス許可
 
   def index
     @items = Item.all
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   def new
@@ -12,14 +17,14 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to @item, notice: '商品が正常に登録されました。'
+      redirect_to root_path, notice: '商品が出品されました。'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-    # before_action :set_item で @item をセットしているため、この行は不要です。
+    # @itemはbefore_actionで設定済み
   end
 
   def update
@@ -28,10 +33,6 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def show
-    # before_action :set_item で @item をセットしているため、この行は不要です。
   end
 
   def destroy
@@ -46,6 +47,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :price, :description, :condition, :cost, :days, :prefecture_id, :category_id, :user_id, :image)
+    params.require(:item).permit(:name, :price, :description, :condition_id, :shipping_cost_id, :prefecture_id,
+                                 :shipping_days_id, :category_id, :image).merge(user_id: current_user.id)
   end
 end
