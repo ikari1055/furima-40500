@@ -12,8 +12,8 @@
 | birthday         | date   | null: false |
 
 ### Association
-- has_many :comments, dependent: :destroy
 - has_many :order_histories, dependent: :destroy
+- has_many :items, dependent: :destroy
 
 
 ## destinations
@@ -28,9 +28,7 @@
 | phone_number     | string  | null: false |
 
 ### Association
-- belongs_to :user
-- belongs_to :item
-
+- belongs_to : order_histories
 
 ## items
 
@@ -51,10 +49,6 @@
 - belongs_to_active_hash :category
 - has_one :order_histories, dependent: :destroy
 - belongs_to_active_hash :prefecture
-- belongs_to_active_hash :condition
-- belongs_to_active_hash :shipping_cost
-- belongs_to_active_hash :shipping_days
-- has_one : destination
 
 
 ## comments
@@ -80,3 +74,4 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
+- has_one : destinations
