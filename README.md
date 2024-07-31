@@ -14,11 +14,11 @@
 ### Association
 - has_many :items, dependent: :destroy
 - has_one :destination, dependent: :destroy
-- has_one :card, dependent: :destroy
+- has_many :comments, dependent: :destroy
+- has_many :order_histories, dependent: :destroy
 
 
-
-## destination
+## destinations
 
 |Column            |Type     |Options      |
 |------------------|---------|-------------|
@@ -34,7 +34,7 @@
 - belongs_to :user
 
 
-## item
+## items
 
 |Column         |Type     |Options     |
 |---------------|---------|------------|
@@ -45,21 +45,41 @@
 | shipping_cost_id | integer | null: false |
 | shipping_days_id | integer | null: false |
 | prefecture_id | integer | null: false |
-| category_id   | integer | null: false, foreign_key: true |
-| user          | references | null: false, foreign_key: true |
+| category_id   | integer | null: false |
+| user_id       | integer | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - belongs_to :category
 - has_many :images, dependent: :destroy
+- has_many :comments, dependent: :destroy
+- has_many :order_histories, dependent: :destroy
 - belongs_to_active_hash :prefecture
 - belongs_to_active_hash :condition
 - belongs_to_active_hash :shipping_cost
 - belongs_to_active_hash :shipping_days
 
-## comments
-|Column   |	Type	    |Options               |
-|user_id	|references	|null: false, FK: true |
-|item_id	|references	|null: false, FK: true |
-|text	    |text	      |null: false           |
 
+## comments
+
+|Column   |	Type	    |Options               |
+|---------|-----------|----------------------|
+| user_id | integer    | null: false, foreign_key: true |
+| item_id | integer    | null: false, foreign_key: true |
+| text    | text       | null: false           |
+
+### Association
+- belongs_to :user
+- belongs_to :item
+
+
+## order_histories
+
+|Column   |	Type	    |Options               |
+|---------|-----------|----------------------|
+| user_id | integer    | null: false, foreign_key: true |
+| item_id | integer    | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
+- belongs_to :item
