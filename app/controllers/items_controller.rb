@@ -6,9 +6,9 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
-  def show
-    @item = Item.find(params[:id])
-  end
+  # def show
+  #   @item = Item.find(params[:id])
+  # end
 
   def new
     @item = Item.new
@@ -23,31 +23,31 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-    # @itemはbefore_actionで設定済み
-  end
+  # def edit
+  #   # @itemはbefore_actionで設定済み
+  # end
 
-  def update
-    if @item.update(item_params)
-      redirect_to @item, notice: '商品が正常に更新されました。'
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   if @item.update(item_params)
+  #     redirect_to @item, notice: '商品が正常に更新されました。'
+  #   else
+  #     render :edit
+  #   end
+  # end
 
-  def destroy
-    @item.destroy
-    redirect_to items_path, notice: '商品が削除されました。'
-  end
+  # def destroy
+  #   @item.destroy
+  #   redirect_to items_path, notice: '商品が削除されました。'
+  # end
 
   private
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
+  # def set_item
+  #   @item = Item.find(params[:id])
+  # end
 
-  def item_params
-    params.require(:item).permit(:name, :price, :description, :condition_id, :shipping_cost_id, :prefecture_id,
-                                 :shipping_days_id, :category_id, :image).merge(user_id: current_user.id)
-  end
+  # def item_params
+  #   params.require(:item).permit(:name, :price, :description, :condition_id, :shipping_cost_id, :prefecture_id,
+  #                                :shipping_days_id, :category_id, :image).merge(user_id: current_user.id)
+  # end
 end
