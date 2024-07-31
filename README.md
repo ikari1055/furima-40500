@@ -12,8 +12,8 @@
 | birthday         | date   | null: false |
 
 ### Association
-- has_many :order_histories, dependent: :destroy
-- has_many :items, dependent: :destroy
+- has_many :order_histories
+- has_many :items
 
 
 ## destinations
@@ -48,7 +48,7 @@
 
 ### Association
 - belongs_to :user
-- has_one :order_history, dependent: :destroy
+- has_one :order_history
 
 
 ## comments
