@@ -12,8 +12,6 @@
 | birthday         | date   | null: false |
 
 ### Association
-- has_many :items, dependent: :destroy
-- has_one :destination, dependent: :destroy
 - has_many :comments, dependent: :destroy
 - has_many :order_histories, dependent: :destroy
 
@@ -22,16 +20,16 @@
 
 |Column            |Type     |Options      |
 |------------------|---------|-------------|
-| user_id          | integer | null: false, foreign_key: true |
 | post_code        | string  | null: false |
 | prefecture_id    | integer | null: false |
 | city             | string  | null: false |
 | address          | string  | null: false |
 | building_name    | string  |
-| phone_number     | string  |
+| phone_number     | string  | null: false |
 
 ### Association
 - belongs_to :user
+- belongs_to :item
 
 
 ## items
@@ -46,18 +44,17 @@
 | shipping_days_id | integer | null: false |
 | prefecture_id | integer | null: false |
 | category_id   | integer | null: false |
-| user_id       | integer | null: false, foreign_key: true |
+| user_id       |references  |null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- belongs_to :category
-- has_many :images, dependent: :destroy
-- has_many :comments, dependent: :destroy
-- has_many :order_histories, dependent: :destroy
+- belongs_to_active_hash :category
+- has_one :order_histories, dependent: :destroy
 - belongs_to_active_hash :prefecture
 - belongs_to_active_hash :condition
 - belongs_to_active_hash :shipping_cost
 - belongs_to_active_hash :shipping_days
+- has_one : destination
 
 
 ## comments
@@ -77,8 +74,8 @@
 
 |Column   |	Type	    |Options               |
 |---------|-----------|----------------------|
-| user_id | integer    | null: false, foreign_key: true |
-| item_id | integer    | null: false, foreign_key: true |
+| user_id | references | null: false, foreign_key: true |
+| item_id | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
