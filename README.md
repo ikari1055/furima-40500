@@ -46,7 +46,6 @@
 
 ### Association
 - belongs_to :user
-- belongs_to_active_hash :category
 - has_one :order_histories, dependent: :destroy
 - belongs_to_active_hash :prefecture
 
