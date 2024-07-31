@@ -30,7 +30,7 @@
 
 
 ### Association
-- belongs_to : order_histories
+- belongs_to : order_history
 
 ## items
 
