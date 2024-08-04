@@ -1,6 +1,5 @@
 function initializePriceCalculation() {
   const priceInput = document.getElementById('item-price');
-  console.log(priceInput);
   const taxPriceElem = document.getElementById('add-tax-price');
   const profitElem = document.getElementById('profit');
 
@@ -11,12 +10,10 @@ function initializePriceCalculation() {
 
   const calculatePrices = () => {
     const price = parseFloat(priceInput.value) || 0;
-    console.log(`入力された価格: ${price}`); // 入力された価格をコンソールに表示
     const taxRate = 0.1; // 10% 手数料
     const taxPrice = price * taxRate;
     const profit = price - taxPrice;
 
-    console.log('イベント発火'); // イベント発火を確認するためのコンソールログ
     taxPriceElem.textContent = Math.floor(taxPrice);
     profitElem.textContent = Math.floor(profit);
 
