@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @user = FactoryBot.create # 明示的にユーザーを作成
-    @item = FactoryBot.build # ユーザーを関連付けてアイテムを作成
+    @user = FactoryBot.create(:user) # 明示的にユーザーを作成
+    @item = FactoryBot.build(:item) # ユーザーを関連付けてアイテムを作成
   end
 
   context 'アイテム新規登録 正常系' do
@@ -34,7 +34,7 @@ RSpec.describe Item, type: :model do
     it '商品の状態が選択されていないと登録できない' do
       @item.condition_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include('Condition を選択してください')
+      expect(@item.errors.full_messages).to include("Condition can't be blank")
     end
 
     it '配送料の負担が選択されていないと登録できない' do
