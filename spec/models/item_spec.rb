@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @user = FactoryBot.create(:user) # 明示的にユーザーを作成
-    @item = FactoryBot.build(:item, user: @user) # ユーザーを関連付けてアイテムを作成
+    @user = FactoryBot.create # 明示的にユーザーを作成
+    @item = FactoryBot.build # ユーザーを関連付けてアイテムを作成
   end
 
   context 'アイテム新規登録 正常系' do
