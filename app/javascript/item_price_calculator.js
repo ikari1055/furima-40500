@@ -23,7 +23,7 @@ function initializePriceCalculation() {
     // 販売手数料を表示する処理
     const addTaxDom = document.getElementById('販売手数料を表示する場所のid');
     if (addTaxDom) {
-      addTaxDom.innerHTML = `販売手数料は ${Math.round(taxPrice)} 円です`;
+      addTaxDom.innerHTML = `販売手数料は ${Math.floor(taxPrice)} 円です`;
     }
   };
 
