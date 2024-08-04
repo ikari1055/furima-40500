@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @user = FactoryBot.create # 明示的にユーザーを作成
-    @item = FactoryBot.build # ユーザーを関連付けてアイテムを作成
+    @user = FactoryBot.create(:user) # 明示的にユーザーを作成
+    @item = FactoryBot.build(:item, user: @user) # ユーザーを関連付けてアイテムを作成
   end
 
   context 'アイテム新規登録 正常系' do
@@ -77,6 +77,27 @@ RSpec.describe Item, type: :model do
       @item.price = 1000.5
       @item.valid?
       expect(@item.errors.full_messages).to include('Price must be an integer')
+    end
+
+    # 画像が空では保存できないことを確認するテストコード
+    it '画像が空では保存できない' do
+      @item.image = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Image can't be blank")
+    end
+
+    # 商品価格に関して、半角数字以外の値が含まれている場合は保存できないこと確認するテストコード
+    it '商品価格に半角数字以外の値が含まれている場合は保存できない' do
+      @item.price = '1000円'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is not a number')
+    end
+
+    # userが紐づいていないと保存できないことを確認するテストコード
+    it 'userが紐づいていないと保存できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include('User must exist')
     end
   end
 end
