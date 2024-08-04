@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create] # ログインしているユーザーのみアクセス許可
 
   def index
-    @items = Item.all
+    # @items = Item.all
   end
 
   # def show
