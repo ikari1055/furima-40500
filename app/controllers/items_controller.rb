@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :update, :show, :destroy]
+  # before_action :set_item, only: [:edit, :update, :show, :destroy]
   before_action :authenticate_user!, only: [:new, :create] # ログインしているユーザーのみアクセス許可
 
   def index
