@@ -17,8 +17,8 @@ function initializePriceCalculation() {
     const profit = price - taxPrice;
 
     console.log('イベント発火'); // イベント発火を確認するためのコンソールログ
-    taxPriceElem.textContent = Math.round(taxPrice);
-    profitElem.textContent = Math.round(profit);
+    taxPriceElem.textContent = Math.floor(taxPrice);
+    profitElem.textContent = Math.floor(profit);
 
     // 販売手数料を表示する処理
     const addTaxDom = document.getElementById('販売手数料を表示する場所のid');
