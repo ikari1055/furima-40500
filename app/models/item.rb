@@ -22,6 +22,8 @@ class Item < ApplicationRecord
   validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :image, presence: true
 
+  scope :recent_first, -> { order(created_at: :desc) }
+
   def sold_out?
     order_history.present?
   end
