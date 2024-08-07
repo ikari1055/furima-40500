@@ -7,8 +7,9 @@ class Item < ApplicationRecord
   belongs_to :user
   belongs_to_active_hash :condition
   belongs_to_active_hash :shipping_cost
-  belongs_to_active_hash :shipping_days
+  belongs_to_active_hash :shipping_day
   belongs_to_active_hash :prefecture
+  # has_one :order_history # 追加
 
   validates :name, presence: true
   validates :price, presence: true,
@@ -16,27 +17,29 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :shipping_cost_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :shipping_days_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :shipping_day_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :image, presence: true
 
-  def sold_out?
-    sold_out
-  end
+  scope :recent_first, -> { order(created_at: :desc) }
 
-  def shipping_fee
-    case shipping_cost_id
-    when 1
-      '送料無料'
-    when 2
-      '500円'
-    when 3
-      '1000円'
-    else
-      '送料未定'
-    end
-  end
+  # def sold_out?
+  #   order_history.present?
+  # end
+
+  # def shipping_fee
+  #   case shipping_cost_id
+  #   when 1
+  #     '---'
+  #   when 2
+  #     '着払い(購入者負担)'
+  #   when 3
+  #     '送料込み(出品者負担)'
+  #   else
+  #     '送料未定'
+  #   end
+  # end
 
   def star_count
     # ここでは仮の値を返します。実際には、評価機能が実装されたら適切な計算を行います。

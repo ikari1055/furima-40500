@@ -5,7 +5,7 @@ FactoryBot.define do
     price { 1000 }
     condition_id { 2 }
     shipping_cost_id { 2 }
-    shipping_days_id { 2 }
+    shipping_day_id { 2 }
     prefecture_id { 2 }
     category_id { 2 }
     association :user # これでユーザーを関連付ける

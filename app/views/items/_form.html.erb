@@ -73,7 +73,7 @@
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:shipping_days_id, ShippingDays.all, :id, :name, { prompt: '選択してください' }, { class: "select-box", id: "item-shipping-days" }) %>
+        <%= f.collection_select(:shipping_day_id, ShippingDay.all, :id, :name, { prompt: '選択してください' }, { class: "select-box", id: "item-shipping-days" }) %>
       </div>
     </div>
 
