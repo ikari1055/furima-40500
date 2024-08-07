@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_cost
   belongs_to_active_hash :shipping_day
   belongs_to_active_hash :prefecture
-  # has_one :order_history # 追加
+  has_one :order_history
 
   validates :name, presence: true
   validates :price, presence: true,
@@ -24,22 +24,9 @@ class Item < ApplicationRecord
 
   scope :recent_first, -> { order(created_at: :desc) }
 
-  # def sold_out?
-  #   order_history.present?
-  # end
-
-  # def shipping_fee
-  #   case shipping_cost_id
-  #   when 1
-  #     '---'
-  #   when 2
-  #     '着払い(購入者負担)'
-  #   when 3
-  #     '送料込み(出品者負担)'
-  #   else
-  #     '送料未定'
-  #   end
-  # end
+  def sold_out?
+    order_history.present?
+  end
 
   def star_count
     # ここでは仮の値を返します。実際には、評価機能が実装されたら適切な計算を行います。
