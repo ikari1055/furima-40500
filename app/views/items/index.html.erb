@@ -130,12 +130,14 @@
       <% if @items.any? %>
         <% @items.each do |item| %>
           <li class='list'>
-            <%= link_to "#" do %> 
+            <%= link_to "#" do %>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
-                <%# <% if item.sold_out? %>
-                  <span class="sold-out">Sold Out</span>
-                <% end %> %>
+                <% if item.sold_out? %>
+                  <div class='sold-out'>
+                    <span>Sold Out!!</span>
+                  </div>
+                <% end %>
               </div>
             <% end %>
             <div class='item-info'>
