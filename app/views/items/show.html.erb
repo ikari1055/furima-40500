@@ -42,7 +42,7 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @item.user.name %></td>
+          <td class="detail-value"><%= @item.user.nickname %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
@@ -102,7 +102,9 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="<%= category_path(@item.category) %>" class="another-item"><%= @item.category.name %>をもっと見る</a>
+<a href="<%= category_path(@item.category) %>" class="another-item">
+  <%= @item.category.name %>をもっと見る
+</a>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
