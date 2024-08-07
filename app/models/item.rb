@@ -28,18 +28,18 @@ class Item < ApplicationRecord
     order_history.present?
   end
 
-  def shipping_fee
-    case shipping_cost_id
-    when 1
-      '---'
-    when 2
-      '着払い(購入者負担)'
-    when 3
-      '送料込み(出品者負担)'
-    else
-      '送料未定'
-    end
-  end
+  # def shipping_fee
+  #   case shipping_cost_id
+  #   when 1
+  #     '---'
+  #   when 2
+  #     '着払い(購入者負担)'
+  #   when 3
+  #     '送料込み(出品者負担)'
+  #   else
+  #     '送料未定'
+  #   end
+  # end
 
   def star_count
     # ここでは仮の値を返します。実際には、評価機能が実装されたら適切な計算を行います。
