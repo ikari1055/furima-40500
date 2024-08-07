@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_cost
   belongs_to_active_hash :shipping_day
   belongs_to_active_hash :prefecture
-  has_one :order_history # 追加
+  # has_one :order_history # 追加
 
   validates :name, presence: true
   validates :price, presence: true,
@@ -24,9 +24,9 @@ class Item < ApplicationRecord
 
   scope :recent_first, -> { order(created_at: :desc) }
 
-  def sold_out?
-    order_history.present?
-  end
+  # def sold_out?
+  #   order_history.present?
+  # end
 
   # def shipping_fee
   #   case shipping_cost_id
