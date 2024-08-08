@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :show]
   # , :destroy
-  before_action :authorize_user!, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update]
   # , :destroy
 
   def index
@@ -50,10 +50,4 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :price, :description, :condition_id, :shipping_cost_id, :prefecture_id,
                                  :shipping_day_id, :category_id, :image).merge(user_id: current_user.id)
   end
-
-  # def authorize_user!
-  #   return unless current_user != @item.user || @item.sold_out?
-
-  #   redirect_to root_path, alert: '編集権限がありません。'
-  # end
 end
