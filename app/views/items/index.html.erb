@@ -120,7 +120,7 @@
   </div>
   <%# /FURIMAの特徴 %>
 
- <%# 商品一覧 %>
+  <%# 商品一覧 %>
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
     <div class="subtitle">
@@ -130,24 +130,22 @@
       <% if @items.any? %>
         <% @items.each do |item| %>
           <li class='list'>
-            <%= link_to "#" do %>
+            <%= link_to item_path(item) do %> <!-- 商品詳細ページへのリンク -->
               <div class='item-img-content'>
-                <%= image_tag item.image, class: "item-img" %>
-             <%# 商品が売れていればsold outを表示しましょう %>
-                <%# <% if item.sold_out? %>
-                  <%# <div class='sold-out'> %>
-                    <%# <span>Sold Out!!</span> %>
-                  <%# </div> %>
-                <%# <% end %> %> %>
-              <%# //商品が売れていればsold outを表示しましょう %>
+                <%= image_tag item.image.attached? ? item.image : "item-sample.png", class: "item-img" %>
+                <%# if item.sold_out? %>
+                  <div class='sold-out'>
+                    <%# <span class="sold-out">Sold Out</span> %>
+                  </div>
+                <%# end %>
               </div>
             <% end %>
             <div class='item-info'>
               <h3 class='item-name'>
-                <%= item.name %>
+                <%= link_to item.name, item_path(item) %> <!-- 商品名をクリックして詳細ページへ遷移 -->
               </h3>
               <div class='item-price'>
-                <span><%= item.price %>円<br><%= item.shipping_cost.name %></span>
+                <span><%= number_with_delimiter(item.price) %>円<br><%= item.shipping_cost.name %></span>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'><%= item.star_count %></span>
@@ -185,4 +183,3 @@
 <% end %>
 
 <%= render "shared/footer" %>
-
