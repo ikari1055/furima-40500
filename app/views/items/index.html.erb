@@ -133,11 +133,11 @@
             <%= link_to item_path(item) do %> <!-- 商品詳細ページへのリンク -->
               <div class='item-img-content'>
                 <%= image_tag item.image.attached? ? item.image : "item-sample.png", class: "item-img" %>
-                <%# if item.sold_out? %>
+                <% if item.sold_out? %>
                   <div class='sold-out'>
-                    <%# <span class="sold-out">Sold Out</span> %>
+                    <% <span class="sold-out">Sold Out</span> %>
                   </div>
-                <%# end %>
+                <% end %>
               </div>
             <% end %>
             <div class='item-info'>
