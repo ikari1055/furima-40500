@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :update, :show]
-  before_action :authenticate_user!, only: [:edit, :update]
-  before_action :check_item_owner, only: [:edit, :update]
+  before_action :set_item, only: [:edit, :update, :show, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :check_item_owner, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.recent_first
@@ -34,10 +34,10 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @item.destroy
-  #   redirect_to items_path, notice: '商品が削除されました。'
-  # end
+  def destroy
+    @item.destroy
+    redirect_to root_path, notice: '商品が削除されました。'
+  end
 
   private
 
