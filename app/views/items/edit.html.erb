@@ -45,49 +45,52 @@
     </div>
     <!-- /商品名と商品説明 -->
 
-    <!-- 商品の詳細 -->
-    <div class="items-detail">
-      <div class="weight-bold-text">商品の詳細</div>
-      <div class="form">
-        <div class="weight-bold-text">
-          カテゴリー
-          <span class="indispensable">必須</span>
-        </div>
-        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: "select-box", id: "item-category"}) %>
-        <div class="weight-bold-text">
-          商品の状態
-          <span class="indispensable">必須</span>
-        </div>
-        <%= f.text_field :condition, class: "select-box", id: "item-sales-status" %>
+  <!-- 商品の詳細 -->
+  <div class="items-detail">
+    <div class="weight-bold-text">商品の詳細</div>
+    <div class="form">
+      <div class="weight-bold-text">
+        カテゴリー
+        <span class="indispensable">必須</span>
       </div>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: "select-box", id: "item-category"}) %>
+      
+      <div class="weight-bold-text">
+        商品の状態
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.collection_select(:condition_id, Condition.all, :id, :name, {}, {class: "select-box", id: "item-sales-status"}) %>
     </div>
-    <!-- /商品の詳細 -->
+  </div>
+  <!-- /商品の詳細 -->
 
-    <!-- 配送について -->
-    <div class="items-detail">
-      <div class="weight-bold-text question-text">
-        <span>配送について</span>
-        <a class="question" href="#">?</a>
-      </div>
-      <div class="form">
-        <div class="weight-bold-text">
-          配送料の負担
-          <span class="indispensable">必須</span>
-        </div>
-        <%= f.text_field :cost, class: "select-box", id: "item-shipping-fee-status" %>
-        <div class="weight-bold-text">
-          発送元の地域
-          <span class="indispensable">必須</span>
-        </div>
-        <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class: "select-box", id: "item-prefecture"}) %>
-        <div class="weight-bold-text">
-          発送までの日数
-          <span class="indispensable">必須</span>
-        </div>
-        <%= f.text_field :days, class: "select-box", id: "item-scheduled-delivery" %>
-      </div>
+  <!-- 配送について -->
+  <div class="items-detail">
+    <div class="weight-bold-text question-text">
+      <span>配送について</span>
+      <a class="question" href="#">?</a>
     </div>
-    <!-- /配送について -->
+    <div class="form">
+      <div class="weight-bold-text">
+        配送料の負担
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.collection_select(:shipping_cost_id, ShippingCost.all, :id, :name, {}, {class: "select-box", id: "item-shipping-fee-status"}) %>
+      
+      <div class="weight-bold-text">
+        発送元の地域
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class: "select-box", id: "item-prefecture"}) %>
+      
+      <div class="weight-bold-text">
+        発送までの日数
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.collection_select(:shipping_day_id, ShippingDay.all, :id, :name, {}, {class: "select-box", id: "item-scheduled-delivery"}) %>
+    </div>
+  </div>
+  <!-- /配送について -->
 
     <!-- 販売価格 -->
     <div class="sell-price">
@@ -143,7 +146,7 @@
     <!-- 下部ボタン -->
     <div class="sell-btn-contents">
       <%= f.submit "変更する", class: "sell-btn" %>
-      <%= link_to 'もどる', items_path, class: "back-btn" %>
+      <%= link_to 'もどる', item_path(@item), class: "back-btn" %>
     </div>
     <!-- /下部ボタン -->
   </div>
