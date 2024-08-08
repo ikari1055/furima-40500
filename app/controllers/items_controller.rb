@@ -1,8 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :show]
-  # , :destroy
   before_action :authenticate_user!, only: [:edit, :update]
-  # , :destroy
+  before_action :check_item_owner, only: [:edit, :update]
 
   def index
     @items = Item.recent_first
@@ -49,5 +48,11 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :price, :description, :condition_id, :shipping_cost_id, :prefecture_id,
                                  :shipping_day_id, :category_id, :image).merge(user_id: current_user.id)
+  end
+
+  def check_item_owner
+    return unless @item.user != current_user
+
+    redirect_to root_path, alert: 'このアイテムの編集権限がありません。'
   end
 end
