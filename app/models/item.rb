@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_day
   belongs_to_active_hash :prefecture
   has_one :order_history
+  has_many :orders
 
   validates :name, presence: true
   validates :price, presence: true,
@@ -31,5 +32,10 @@ class Item < ApplicationRecord
   def star_count
     # ここでは仮の値を返します。実際には、評価機能が実装されたら適切な計算を行います。
     5
+  end
+
+  # 画像のURLを返すメソッド
+  def image_url
+    Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true) if image.attached?
   end
 end
