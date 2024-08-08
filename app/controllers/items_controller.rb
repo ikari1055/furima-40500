@@ -1,15 +1,14 @@
 class ItemsController < ApplicationController
-  # before_action :set_item, only: [:edit, :update, :show, :destroy]
-  before_action :authenticate_user!, only: [:new, :create] # ログインしているユーザーのみアクセス許可
-  before_action :set_item, only: [:show]
-  # before_action :authorize_user, only: [:edit, :update, :destroy]
+  before_action :set_item, only: [:edit, :update, :show]
+  # , :destroy
+  before_action :authorize_user!, only: [:edit, :update]
+  # , :destroy
 
   def index
     @items = Item.recent_first
   end
 
   def show
-    # @item = Item.find(params[:id])
   end
 
   def new
@@ -25,17 +24,16 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def edit
-  #   # @itemはbefore_actionで設定済み
-  # end
+  def edit
+  end
 
-  # def update
-  #   if @item.update(item_params)
-  #     redirect_to @item, notice: '商品が正常に更新されました。'
-  #   else
-  #     render :edit
-  #   end
-  # end
+  def update
+    if @item.update(item_params)
+      redirect_to @item, notice: '商品が正常に更新されました。'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   # def destroy
   #   @item.destroy
@@ -52,4 +50,10 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :price, :description, :condition_id, :shipping_cost_id, :prefecture_id,
                                  :shipping_day_id, :category_id, :image).merge(user_id: current_user.id)
   end
+
+  # def authorize_user!
+  #   return unless current_user != @item.user || @item.sold_out?
+
+  #   redirect_to root_path, alert: '編集権限がありません。'
+  # end
 end
