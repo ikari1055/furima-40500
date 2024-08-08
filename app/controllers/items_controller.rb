@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   # before_action :set_item, only: [:edit, :update, :show, :destroy]
   before_action :authenticate_user!, only: [:new, :create] # ログインしているユーザーのみアクセス許可
   before_action :set_item, only: [:show]
-  before_action :authorize_user, only: [:edit, :update, :destroy]
+  # before_action :authorize_user, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.recent_first
