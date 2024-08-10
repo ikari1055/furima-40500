@@ -11,7 +11,8 @@ class OrdersController < ApplicationController
       @order_form.save
       redirect_to root_path, notice: '購入が完了しました'
     else
-      render :new
+      # エラーが発生した場合、`new` ビューを再表示
+      render 'new', status: :unprocessable_entity
     end
   end
 

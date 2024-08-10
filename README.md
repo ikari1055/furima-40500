@@ -16,7 +16,7 @@
 - has_many :items
 
 
-## destinations
+## addresses
 
 |Column            |Type     |Options      |
 |------------------|---------|-------------|
@@ -74,4 +74,4 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one :destination
+- has_one : address
