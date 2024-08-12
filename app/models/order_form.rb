@@ -3,30 +3,19 @@ class OrderForm
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :token
 
   # バリデーションの定義
-  with_options presence: { message: "can't be blank" } do
-    validates :token
-    validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
-    validates :city
-    validates :addresses
-    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Input only number' },
-                             length: { minimum: 10, message: 'is too short' }
+  with_options presence: true do
     validates :user_id
     validates :item_id
+    validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
+    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :city
+    validates :addresses
+    validates :phone_number, format: { with: /\A\d+\z/, message: 'is invalid. Input only number' },
+                             length: { in: 10..11, message: 'is invalid. Enter 10 or 11 digits' }
+    validates :token
   end
 
-  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-
-  # カスタムバリデーションでuser_idとitem_idのエラーを削除
-  validate :exclude_user_and_item_error_messages
-
-  # def initialize(attributes = {})
-  #   super
-  #   # item_id が設定されている場合に価格を設定
-  #   @price = Item.find(item_id).price if item_id
-  # end
-
   def save
-    # Order モデルを作成
     order = OrderHistory.create(user_id:, item_id:)
     # 住所情報を保存する
     Address.create(postal_code:, prefecture_id:, city:, addresses:,

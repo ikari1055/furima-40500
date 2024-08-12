@@ -3,9 +3,10 @@ class OrdersController < ApplicationController
   before_action :set_item, only: [:new, :create]
   before_action :check_access, only: [:new, :create]
 
-  def new
+  def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order_form = OrderForm.new
+    @item = Item.find(params[:item_id])
   end
 
   def create
@@ -17,7 +18,7 @@ class OrdersController < ApplicationController
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       # エラーが発生した場合、`new` ビューを再表示
-      render 'new', status: :unprocessable_entity
+      render 'index', status: :unprocessable_entity
     end
   end
 
