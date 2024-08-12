@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :check_item_owner, only: [:edit, :update, :destroy]
-
+  before_action :redirect_if_sold_out, only: [:edit, :update]
   def index
     @items = Item.recent_first
   end
@@ -54,5 +54,11 @@ class ItemsController < ApplicationController
 
   def check_item_owner
     redirect_to root_path, alert: 'このアイテムの編集権限がありません。' if @item.user != current_user
+  end
+
+  def redirect_if_sold_out
+    return unless @item.sold_out? && @item.user == current_user
+
+    redirect_to root_path, alert: 'この商品は既に売却済みです。編集できません。'
   end
 end
