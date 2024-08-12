@@ -10,7 +10,6 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_day
   belongs_to_active_hash :prefecture
   has_one :order_history
-  has_many :orders
 
   validates :name, presence: true
   validates :price, presence: true,

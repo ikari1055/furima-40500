@@ -24,10 +24,10 @@ class OrderForm
 
   def save
     # Order モデルを作成
-    order = Order.create(user_id:, item_id:)
+    order = OrderHistory.create(user_id:, item_id:)
     # 住所情報を保存する
     Address.create(postal_code:, prefecture_id:, city:, addresses:,
-                   building:, phone_number:, order_id: order.id)
+                   building:, phone_number:, order_history_id: order.id)
   end
 
   private
