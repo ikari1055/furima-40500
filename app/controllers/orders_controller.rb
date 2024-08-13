@@ -1,12 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user! # ログインを要求する
-  before_action :set_item, only: [:new, :create]
-  before_action :check_access, only: [:new, :create]
+  before_action :set_item, only: [:index, :create]
+  before_action :check_access, only: [:index, :create]
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order_form = OrderForm.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
