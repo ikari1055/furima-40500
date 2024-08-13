@@ -23,9 +23,4 @@ class OrderForm
   end
 
   private
-
-  def exclude_user_and_item_error_messages
-    errors.delete(:user_id)
-    errors.delete(:item_id)
-  end
 end
