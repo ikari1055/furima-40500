@@ -42,14 +42,12 @@ class OrdersController < ApplicationController
   end
 
   def check_access
-    if current_user
-      if @item.user_id == current_user.id
-        redirect_to root_path, alert: '自分が出品した商品は購入できません'
-      elsif @item.sold_out?
-        redirect_to root_path, alert: 'この商品はすでに売却済みです'
-      end
-    else
+    if current_user.nil?
       redirect_to new_user_session_path, alert: 'ログインが必要です'
+    elsif @item.user_id == current_user.id
+      redirect_to root_path, alert: '自分が出品した商品は購入できません'
+    elsif @item.sold_out?
+      redirect_to root_path, alert: 'この商品はすでに売却済みです'
     end
   end
 end
