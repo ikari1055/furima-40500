@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 
 pin "application", preload: true
 pin "item_price_calculator", to: "item_price_calculator.js", preload: true
+pin "card", to: "card.js"

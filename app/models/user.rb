@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # Association
   has_many :item
+  has_many :order_histories
 
   # バリデーションの設定
   validates :nickname, presence: true
