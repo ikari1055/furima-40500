@@ -11,6 +11,11 @@ RSpec.describe OrderForm, type: :model do
     it '全ての項目が入力されていれば登録できる' do
       expect(@order_form).to be_valid
     end
+
+    it '建物名が空でも登録できる' do
+      @order_form.building = ''
+      expect(@order_form).to be_valid
+    end
   end
 
   context '内容に問題がある場合' do
