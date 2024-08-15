@@ -46,13 +46,13 @@
           カテゴリー
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:category_id, Category.all, :id, :name, { prompt: '---' }, { class: "select-box", id: "item-category" }) %>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, { }, { class: "select-box", id: "item-category" }) %>
         
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:condition_id, Condition.all, :id, :name, { prompt: '---' }, { class: "select-box", id: "item-condition" }) %>
+        <%= f.collection_select(:condition_id, Condition.all, :id, :name, { }, { class: "select-box", id: "item-condition" }) %>
       </div>
     </div>
     
@@ -67,19 +67,19 @@
           配送料の負担
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:shipping_cost_id, ShippingCost.all, :id, :name, { prompt: '---' }, { class: "select-box", id: "item-shipping-cost" }) %>
+        <%= f.collection_select(:shipping_cost_id, ShippingCost.all, :id, :name, { }, { class: "select-box", id: "item-shipping-cost" }) %>
         
         <div class="weight-bold-text">
           発送元の地域
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, { prompt: '---' }, { class: "select-box", id: "item-prefecture" }) %>
+        <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, { }, { class: "select-box", id: "item-prefecture" }) %>
         
         <div class="weight-bold-text">
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:shipping_day_id, ShippingDay.all, :id, :name, { prompt: '---' }, { class: "select-box", id: "item-shipping-days" }) %>
+        <%= f.collection_select(:shipping_day_id, ShippingDay.all, :id, :name, { }, { class: "select-box", id: "item-shipping-days" }) %>
       </div>
     </div>
     
